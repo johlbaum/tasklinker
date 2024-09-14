@@ -52,7 +52,7 @@ class ProjectsController extends AbstractController
         }
 
         return $this->render('projects/new.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form,
         ]);
     }
 
