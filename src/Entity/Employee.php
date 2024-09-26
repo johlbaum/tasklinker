@@ -42,8 +42,6 @@ class Employee
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $entryDate = null;
 
-    private ?string $avatar = null;
-
     /**
      * @var Collection<int, Project>
      */
@@ -181,17 +179,6 @@ class Employee
             }
         }
 
-        return $this;
-    }
-
-    public function getAvatar(): ?string
-    {
-        return $this->avatar;
-    }
-
-    public function setAvatar(?string $avatar): self
-    {
-        $this->avatar = $avatar;
         return $this;
     }
 }

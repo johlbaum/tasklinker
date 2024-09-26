@@ -41,12 +41,15 @@
 				</ul>
 			</nav>
 			<main>
-				<header>
-					{% block header %}{% endblock %}
-				</header>
-				<div id="content"> {% block body %}{% endblock %}
+				<div class="header">
+					<div class="title-page"> {% block header %}{% endblock %}
+						</div>
 					</div>
+					<div id="content"> {% block body %}{% endblock %}
+						</div>
+					</main>
 				</main>
-			</div>
-		</body>
-	</html>
+			</body>
+		</html>
+	</div>
+</body></html>

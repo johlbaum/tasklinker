@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Task;
 use App\Form\TaskType;
 use App\Repository\ProjectRepository;
+use App\Repository\StatusRepository;
 use App\Repository\TaskRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,7 +13,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Service\EntityManagerService;
-use App\Service\AvatarService;
 
 
 class TasksController extends AbstractController
@@ -22,7 +22,7 @@ class TasksController extends AbstractController
         private TaskRepository $taskRepository,
         private ProjectRepository $projectRepository,
         private EntityManagerService $entityManagerService,
-        private AvatarService $avatarService
+        private StatusRepository $statusRepository,
     ) {}
 
     /**
@@ -31,23 +31,15 @@ class TasksController extends AbstractController
     #[Route('/projet/{projectId}/taches', name: 'app_tasks_show', requirements: ['projectId' => '\d+'], methods: ['GET'])]
     public function showTasks(int $projectId): Response
     {
-        // On récupère le projet et les employés associés.
+        // On récupère le projet auquel les tâches sont associées.
         $project = $this->entityManagerService->getEntity($this->projectRepository, $projectId);
-        $projectEmployees = $project->getEmployees()->toArray();
 
-        // On génère les avatars des employés associés au projet.
-        $this->avatarService->setAvatarsForProjectEmployees($projectEmployees);
-
-        // On récupère les tâches du projet.
-        $tasksProject = $project->getTasks()->toArray();
-
-        // On génère les avatars des employés associés aux tâches.
-        $this->avatarService->setAvatarsForTaskEmployees($tasksProject);
+        // On récupère les statuts.
+        $statuses = $this->statusRepository->findAll();
 
         return $this->render('tasks/index.html.twig', [
             'project' => $project,
-            'tasksProject' => $tasksProject,
-            'projectEmployees' => $projectEmployees,
+            'statuses' => $statuses,
         ]);
     }
 

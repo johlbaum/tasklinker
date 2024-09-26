@@ -11,6 +11,10 @@ html, body {
     font-family: 'Manrope', sans-serif;
 }
 
+input:focus {
+  outline: none;
+}
+
 .sf-toolbar {
     position: fixed;
 }
@@ -78,10 +82,12 @@ ul#main-menu i {
     height: 22px;
 }
 
-header {
+.header {
     background: #4D8077;
     height: 155px;
     padding: 30px 80px 10px 80px;
+    display: flex;
+    justify-content: space-between;
 }
 
 div#current-user {
@@ -229,7 +235,7 @@ form input, form select, form textarea {
 }
 
 form {
-    width: 320px;
+    width: 350px;
 }
 
 form label {
@@ -317,7 +323,12 @@ form .select2-container--default .select2-selection--multiple .select2-selection
 
 /* Tasks */
 
-div#tasks-container {
+.tasks-container {
+    display: flex;
+    gap: 15px
+}
+
+div#task-container {
     display: flex;
     gap: 10px;
     align-items: flex-start;
@@ -331,7 +342,6 @@ div#tasks-container {
     background: white;
     border-radius: 15px;
     padding: 20px 12px;
-    max-width: calc(33.33% - 6.67px);
 }
 
 .task-column h2 {
@@ -498,3 +508,4 @@ table#team-container thead tr th:last-child {
     max-width: 315px;
     width: 315px;
 }
+
